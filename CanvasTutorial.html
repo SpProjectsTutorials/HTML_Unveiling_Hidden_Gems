@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <canvas id="SPCanvas" width="500" height="500" style="border:1px solid #d3d3d3;">
+        Your browser does not support the HTML5 canvas tag.
+    </canvas>
+
+    <script>
+		// Sometimes you may be getting "TypeError: Cannot read properties of null (reading 'getContext')" it typically occurs when the JavaScript is trying to access the canvas element before it has been fully loaded into the DOM.
+		//To fix this, I am wrapping my JavaScript code in a window.onload function. This will ensure that script only runs after the entire page (including the canvas element) has fully loaded.
+        window.onload = function() {
+            // Get the canvas element and its context
+            var canvas = document.getElementById("SPCanvas");
+            var ctx = canvas.getContext("2d");
+
+            // Define the initial position, speed, and size of the circle
+            var x = canvas.width / 2;
+            var y = canvas.height / 2;
+            var dx = 2;
+            var dy = -2;
+            var radius = 30;
+
+            // Function to draw the circle
+            function drawCircle() {
+                // Clear the canvas
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                // Begin a new path for the circle
+                ctx.beginPath();
+
+                // Draw the circle
+                ctx.arc(x, y, radius, 0, Math.PI * 2);
+
+                // Set the fill color to a random color
+                ctx.fillStyle = '#' + Math.floor(Math.random() * 16777215).toString(16);
+
+                // Fill the circle
+                ctx.fill();
+
+                // Close the path
+                ctx.closePath();
+
+                // Placing some more content inside the circle
+                ctx.font = "30px Arial";
+                ctx.fillStyle = "white";
+                ctx.fillText("SP", x - 15, y + 10);
+            }
+
+            // Function to update the circle's position
+            function updateCircle() {
+                // Change direction if the circle hits the edge of the canvas
+                if (x + dx > canvas.width - radius || x + dx < radius) {
+                    dx = -dx;
+                }
+                if (y + dy > canvas.height - radius || y + dy < radius) {
+                    dy = -dy;
+                }
+
+                // Update the circle's position
+                x += dx;
+                y += dy;
+            }
+
+            // Function to draw and update the circle
+            function draw() {
+                drawCircle();
+                updateCircle();
+            }
+
+            // Call the draw function every second
+            setInterval(draw, 100);
+        }
+    </script>
+
+</body>
+</html>
