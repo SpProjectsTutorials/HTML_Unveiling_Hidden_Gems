@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark Mode Slider with Icons</title>
+    <style>
+        body {
+            padding: 25px;
+            background-color: white;
+            color: black;
+            font-size: 25px;
+            font-family: 'Arial', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        h1 {
+            text-align: center;
+            font-size: 2em;
+        }
+        .toggle-container {
+            position: relative;
+            width: 90px;
+            height: 34px;
+            margin: 20px auto;
+        }
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+            box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+        .toggle-slider:before {
+            position: absolute;
+            content: '';
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+            box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+        input:checked + .toggle-slider {
+            background-color: #222;
+        }
+        input:checked + .toggle-slider:before {
+            transform: translateX(54px);
+        }
+        .icon {
+            position: absolute;
+            height: 20px;
+            width: 20px;
+            transition: all 0.3s ease;
+        }
+        .sun-icon {
+            top: 7px;
+            left: 10px;
+            opacity: 0;
+            z-index: 0;
+        }
+        .moon-icon {
+            top: 7px;
+            right: 10px;
+            opacity: 1;
+            z-index: 1;
+        }
+        input:checked ~ .sun-icon {
+            opacity: 1;
+            z-index: 1;
+        }
+        input:checked ~ .moon-icon {
+            opacity: 0;
+            z-index: 0;
+        }
+        .dark-mode {
+            background-color: #222;
+            color: #ddd;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to Dark Mode Slider Example</h1>
+    <label class="toggle-container">
+        <input type="checkbox" id="toggle-dark-mode">
+        <span class="toggle-slider"></span>
+        <img src="sun-icon-path" class="icon sun-icon" alt="Sun Icon"> <!-- Replace 'sun-icon-path' with the actual path to your sun icon -->
+        <img src="moon-icon-path" class="icon moon-icon" alt="Moon Icon"> <!-- Replace 'moon-icon-path' with the actual path to your moon icon -->
+    </label>
+    <script>
+        document.getElementById('toggle-dark-mode').addEventListener('change', function() {
+            document.body.classList.toggle('dark-mode');
+        });
+    </script>
+</body>
+</html>
